@@ -1,25 +1,40 @@
-<h1>Listing users</h1>
+<header>
+  
+</header>
+<body>
+  <h1>Hello, Admin!</h1>
 
-<%= link_to 'New user', new_user_path %>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Picture</th>
-    <th>Position</th>
-  </tr>
+  <ul class="nav nav-pills">
+    <li role="presentation"><%= link_to 'Work man', controller: 'users' %></li>
+    <li role="presentation"><%= link_to 'Position', controller: 'positions' %></li>
+  </ul>
 
-  <% @users.each do |user| %>
+  <h1>Listing users</h1>
+
+  <%= link_to 'New user', new_user_path, class: 'btn btn-primary' %>
+  <table class="table">
     <tr>
-      <td><%= user.name %></td>
-      <td><%= user.picture %></td>
-      <td><%= user.position.name %></td>
-      <td><%= link_to 'Show', user_path(user) %></td>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
-      <td><%= link_to 'Destroy', user_path(user),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+      <th>Name</th>
+      <th>Picture</th>
+      <th>Position</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
 
-<%= link_to 'Back', root_path %>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.picture %></td>
+        <td><%= user.position.name %></td>
+        <td><%= link_to 'Show', user_path(user) %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user_path(user),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= link_to 'Back', root_path %>
+</body>
