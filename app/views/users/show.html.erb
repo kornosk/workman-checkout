@@ -1,0 +1,86 @@
+<p>
+  	<strong>ID:</strong>
+  	<%= @user.id %>
+</p>
+
+<p>
+  	<strong>Name:</strong>
+  	<%= @user.name %>
+</p>
+ 
+<p>
+	<strong>Picture:</strong>
+	<%= @user.picture %>
+</p>
+
+<p>
+	<strong>Position</strong>
+	<%= @user.position.name %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+<hr>
+
+<!-- Working date -->
+<h2>Working Dates</h2>
+<%= link_to 'Add', new_user_working_date_path(@user.id) %>
+
+<table>
+	<tr>
+	    <th>ID</th>
+	    <th>Start</th>
+	    <th>End</th>
+  	</tr>
+
+  	<% @user.working_dates.each do |working_date| %>
+    <tr>
+  		<td><%= working_date.id %></td>
+	    <td><%= working_date.start %></td>
+	    <td><%= working_date.end %></td>
+	    <td><%= link_to 'Remove', user_working_date_path(@user, working_date),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  	<% end %>
+</table>
+
+<hr>
+
+<!-- Absent date -->
+<h2>Absent Dates</h2>
+<%= link_to 'Add', new_user_absence_path(@user.id) %>
+
+<table>
+	<tr>
+	    <th>ID</th>
+	    <th>Start</th>
+	    <th>End</th>
+	    <th>Remark</th>
+  	</tr>
+
+  	<% @user.absences.each do |absence| %>
+    <tr>
+  		<td><%= absence.id %></td>
+	    <td><%= absence.start %></td>
+	    <td><%= absence.end %></td>
+	    <td><%= absence.remark %></td>
+	    <td><%= link_to 'Remove', user_absence_path(@user, absence),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  	<% end %>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+

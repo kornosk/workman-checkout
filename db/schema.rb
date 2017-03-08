@@ -25,26 +25,26 @@ ActiveRecord::Schema.define(version: 20170308032515) do
   create_table "positions", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "users_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["users_id"], name: "index_positions_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "picture"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "position_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["position_id"], name: "index_users_on_position_id"
   end
 
   create_table "working_dates", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_working_dates_on_users_id"
+    t.index ["user_id"], name: "index_working_dates_on_user_id"
   end
 
 end

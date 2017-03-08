@@ -1,0 +1,34 @@
+<h1>New Working Date</h1>
+<%= form_for ([@user, @working_date]) do |f| %>
+ 
+  <% if @working_date.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@working_date.errors.count, "error") %> prohibited
+        this working_date from being saved:
+      </h2>
+      <ul>
+        <% @working_date.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :start, :placeholder => "Start" %><br>
+    <%= f.text_field :start %>
+  </p>
+ 
+  <p>
+    <%= f.label :end, :placeholder => "End" %><br>
+    <%= f.text_field :end %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>
+
+<%= link_to 'Back', user_path(@user) %>

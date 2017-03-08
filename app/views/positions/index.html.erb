@@ -1,0 +1,25 @@
+<h1>Listing positions</h1>
+
+<%= link_to 'New position', new_position_path %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <% @positions.each do |position| %>
+    <tr>
+      <td><%= position.id %></td>
+      <td><%= position.name %></td>
+      <td><%= position.description %></td>
+      <td><%= link_to 'Show', position_path(position) %></td>
+      <td><%= link_to 'Edit', edit_position_path(position) %></td>
+      <td><%= link_to 'Destroy', position_path(position),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', root_path %>

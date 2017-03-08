@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'welcome#index'
-  resources :users do
-  		resources :working_dates
+  	root 'welcome#index'
+
+	# resources :users
+	resources :positions
+
+	resources :users do
+		resources :working_dates
   		resources :absences
-  		resources :position
 	end
+
+	# resources :working_dates do	
+	# 	member do
+	# 		get 'create_working'
+	# 	end
+	# end
+	# resources :working_dates do
+	# 	member do
+	# 		get 'create_working'
+	# 	end
+	# end
+
 end
