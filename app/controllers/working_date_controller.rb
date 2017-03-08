@@ -1,0 +1,2 @@
+class WorkingDateController < ApplicationController
+end
