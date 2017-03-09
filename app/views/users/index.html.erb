@@ -2,41 +2,51 @@
   
 </header>
 <body>
-  <h1>Hello, Admin!</h1>
+  <%= render 'layouts/nav' %>
+  <section class="section">
+    <div class="container">
+      <div class="heading">
+        <h1 class="title">Listing users</h1>
+      </div>
+    </div>
 
-  <ul class="nav nav-pills">
-    <li role="presentation"><%= link_to 'Work man', controller: 'users' %></li>
-    <li role="presentation"><%= link_to 'Position', controller: 'positions' %></li>
-  </ul>
+    <%= link_to 'New user', new_user_path, class: 'btn btn-primary' %>
+    <div class="container">
+      <div class="box">
+        <table class="table table-striped table-hover" cellspacing="0" id="users-index-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Picture</th>
+              <th>Position</th>
+              <th>Avg Time</th>
+              <th>Show</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tfoot>
 
-  <h1>Listing users</h1>
-
-  <%= link_to 'New user', new_user_path, class: 'btn btn-primary' %>
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Picture</th>
-      <th>Position</th>
-      <th>Avg time</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><img class="profile-pic-small" src=<%= user.picture %>></td>
-        <td><%= link_to user.position.name, position_path(user.position) %></td>
-        <!-- <td><%# avg_time %></td> -->
-        <td><%= link_to 'Show', user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user_path(user),
+          </tfoot>
+          <tbody>
+            <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><img class="profile-pic-small" src=<%= user.picture %>></td>
+              <td><%= link_to user.position.name, position_path(user.position) %></td>
+              <td><%= @avg_time[user.id] %></td>
+              <td><%= link_to 'Show', user_path(user) %></td>
+              <td><%= link_to 'Edit', edit_user_path(user) %></td>
+              <td><%= link_to 'Destroy', user_path(user),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </table>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </section>
 
   <%= link_to 'Back', root_path %>
 </body>

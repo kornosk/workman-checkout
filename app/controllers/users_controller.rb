@@ -1,21 +1,17 @@
 class UsersController < ApplicationController
 	def index
 		@users = User.all
-		# @user[0][:avg_time] = '555555'
-		# raise @users[0]['avg_time'].inspect
-		# raise @users[0][:avg_time].inspect
+		@avg_time = {}
 
 		# Compute average time
-		# i = 0
-		# @users.each do |user|
-		# 	time_amount = 0
-		# 	date_count = user.working_dates.count
-		# 	user.working_dates.each do |working_date|
-		# 		amount += dif_time(working_date.start, working_date.end)
-		# 	end
-		# 	@user[i]['avg_time'] = (amount / date_count)
-		# 	i += 1
-		# end
+		@users.each do |user|
+			time_amount = 0
+			date_count = user.working_dates.count
+			user.working_dates.each do |working_date|
+				time_amount += diff_time(working_date.start, working_date.end)
+			end
+			@avg_time[user.id] = (date_count == 0) ? 0 : (time_amount / date_count)
+		end
 	end
 
 	def new
@@ -75,5 +71,9 @@ class UsersController < ApplicationController
 	private
 		def user_params
 			params.require(:user).permit(:name, :picture, :position_id)
+		end
+
+		def diff_time(start_time, end_time) # Get datetime
+			return ((start_time - end_time).abs) / 3600
 		end
 end

@@ -12,13 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
-//= require_tree .
-
-
 //= require bootstrap-sprockets
 //= require highcharts
 //= require chartkick
 //= require moment
 //= require bootstrap-datetimepicker
 //= require moment/th
+//= require_tree .
