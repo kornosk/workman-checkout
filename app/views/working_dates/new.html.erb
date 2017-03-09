@@ -15,15 +15,40 @@
     </div>
   <% end %>
  
+
+  <!-- Datetime Picker -->
+  <p>
+    <%= f.label :date, :placeholder => "Date" %><br>
+    <%= date_select :date, "class" => 'input-group date' %>
+  </p>
   <p>
     <%= f.label :start, :placeholder => "Start" %><br>
-    <%= f.text_field :start %>
+    <%= f.time_select :start, "class" => 'input-group date' %>
   </p>
  
   <p>
     <%= f.label :end, :placeholder => "End" %><br>
-    <%= f.text_field :end %>
+    <%= f.time_select :end, "class" => 'input-group date' %>
   </p>
+
+  <!-- <div class="container">
+    <div class="form-group">
+      <div class='input-group date' id='datetimepicker-start'>
+        <%= f.text_field :start, "class" => 'form-control', data: { date_format: 'HH:mm z' }, pickDate: false, pickSeconds: false, pick12HourFormat: false %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-time"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class='input-group date' id='datetimepicker-end'>
+        <%= f.text_field :end, "class" => 'form-control', data: { date_format: 'HH:mm z' }, pickDate: false, pickSeconds: false, pick12HourFormat: false %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-time"></span>
+        </span>
+      </div>
+    </div>
+  </div> -->
  
   <p>
     <%= f.submit %>

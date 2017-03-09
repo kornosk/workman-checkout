@@ -14,4 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require bootstrap
+
+
+//= require bootstrap-sprockets
+//= require highcharts
+//= require chartkick
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/th

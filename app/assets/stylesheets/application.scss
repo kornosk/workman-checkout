@@ -13,4 +13,7 @@
  *= require_tree .
  *= require_self
  */
-*= require bootstrap
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-datetimepicker"

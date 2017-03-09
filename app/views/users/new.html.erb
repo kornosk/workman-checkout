@@ -23,13 +23,12 @@
  
   <p>
     <%= f.label :picture, :placeholder => "Picture" %><br>
-    <%# f.text_field :picture %>
     <%= f.file_field :picture %>
   </p>
 
   <p>
     <%= f.label :position_id, :placeholder => "Position ID" %><br>
-    <%= f.text_field :position_id %>
+    <%= f.collection_select :position_id, Position.order(:name),:id,:name %>
   </p>
  
   <p>

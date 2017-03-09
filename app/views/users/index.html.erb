@@ -17,6 +17,7 @@
       <th>Name</th>
       <th>Picture</th>
       <th>Position</th>
+      <th>Avg time</th>
       <th></th>
       <th></th>
       <th></th>
@@ -25,8 +26,9 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= user.picture %></td>
-        <td><%= user.position.name %></td>
+        <td><img class="profile-pic-small" src=<%= user.picture %>></td>
+        <td><%= link_to user.position.name, position_path(user.position) %></td>
+        <!-- <td><%# avg_time %></td> -->
         <td><%= link_to 'Show', user_path(user) %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user_path(user),

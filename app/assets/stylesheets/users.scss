@@ -3,7 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .profile-pic {
-	border-radius: 100px;
-	width: 20vh;
-	height: 20vh;
+	&-small {
+		border-radius: 100px;
+		width: 10vh;
+		height: 10vh;
+	}
+
+	&-medium {
+		border-radius: 100px;
+		width: 20vh;
+		height: 20vh;
+	}
 }

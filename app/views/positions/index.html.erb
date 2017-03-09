@@ -8,11 +8,14 @@
 <h1>Listing positions</h1>
 
 <%= link_to 'New position', new_position_path %>
-<table>
+<table class="table">
   <tr>
     <th>ID</th>
     <th>Name</th>
     <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
   <% @positions.each do |position| %>

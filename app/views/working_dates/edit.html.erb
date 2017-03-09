@@ -1,5 +1,6 @@
 <h1>New Working Date</h1>
 <%= form_for ([@user, @working_date]) do |f| %>
+ 
   <% if @working_date.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -14,19 +15,25 @@
     </div>
   <% end %>
 
-  <!-- Input -->
+  <!-- Date Picker -->
+  <p>
+    <%= f.label :date, :placeholder => "Date" %><br>
+    <%= date_select :date, "class" => 'input-group date' %>
+  </p>
+  
   <p>
     <%= f.label :start, :placeholder => "Start" %><br>
-    <%= f.text_field :start %>
+    <%= f.time_select :start, "class" => 'input-group date' %>
   </p>
  
   <p>
     <%= f.label :end, :placeholder => "End" %><br>
-    <%= f.text_field :end %>
+    <%= f.time_select :end, "class" => 'input-group date' %>
   </p>
  
   <p>
-    <%= f.submit %>
+    <%# f.submit %>
+    <%= button_tag :submit, class: 'btn btn-primary' %>
   </p>
  
 <% end %>

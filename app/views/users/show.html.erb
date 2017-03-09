@@ -10,8 +10,7 @@
  
 <p>
 	<strong>Picture:</strong>
-	<!-- <%= @user.picture %> -->
-	<img class="profile-pic" src=<%= @user.picture %>>
+	<img class="profile-pic-medium" src=<%= @user.picture %>>
 </p>
 
 <p>
@@ -28,18 +27,23 @@
 <h2>Working Dates</h2>
 <%= link_to 'Add', new_user_working_date_path(@user.id) %>
 
-<table>
+<table class="table">
 	<tr>
 	    <th>ID</th>
+      <th>Date</th>
 	    <th>Start</th>
 	    <th>End</th>
+      <th></th>
+      <th></th>
   	</tr>
 
-  	<% @user.working_dates.each do |working_date| %>
+  	<% @user.working_dates.limit(7).each do |working_date| %>
     <tr>
   		<td><%= working_date.id %></td>
-	    <td><%= working_date.start %></td>
-	    <td><%= working_date.end %></td>
+	    <td><%= working_date.start.to_date %></td>
+      <td><%= working_date.start.to_s(:time) %></td>
+	    <td><%= working_date.end.to_s(:time) %></td>
+      <td><%= link_to 'Edit', edit_user_working_date_path(@user, working_date) %></td>
 	    <td><%= link_to 'Remove', user_working_date_path(@user, working_date),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
@@ -47,13 +51,24 @@
   	<% end %>
 </table>
 
+<!-- Chart for a week -->
+<%= line_chart [
+  {name: "Start", data: @start},
+  {name: "End", data: @end}
+],
+min: 0.0, max: 24.00,
+xtitle: "Date", ytitle: "Time",
+curve: true,
+legend: "top"
+%>
+
 <hr>
 
 <!-- Absent date -->
 <h2>Absent Dates</h2>
 <%= link_to 'Add', new_user_absence_path(@user.id) %>
 
-<table>
+<table class="table">
 	<tr>
 	    <th>ID</th>
 	    <th>Start</th>

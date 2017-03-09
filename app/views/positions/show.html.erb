@@ -20,17 +20,15 @@
 <!-- Workman list -->
 <hr>
 <h2>Workman</h2>
-<table>
+<table class="table">
 	<tr>
 	    <th>Name</th>
 	    <th>Picture</th>
-	    <th>Position</th>
   	</tr>
   	<% @position.users.each do |user| %>
     <tr>
   		<td><%= user.name %></td>
-	    <td><%= user.picture %></td>
-	    <td><%= user.position.name %></td>
+	    <td><img class="profile-pic-small" src=<%= user.picture %>></td>
 	    <td><%= link_to 'Detail', user_path(user) %></td>
     </tr>
   	<% end %>
