@@ -60,16 +60,29 @@ class UsersController < ApplicationController
 		@total_avg_time = (date_count == 0) ? 0 : (time_amount / date_count)
 
 		# Compute all average time
-		@users = User.all
-		@avg_time = {}
-		@users.each do |user|
+		@compare = {}
+		@compare[:superior_number] = 0
+		@compare[:inferior_number] = 0
+		other_avg_time = {}
+		all_avg = 0;
+		users = User.all
+		users.each do |user|
 			time_amount = 0
 			date_count = user.working_dates.count
 			user.working_dates.each do |working_date|
 				time_amount += diff_time(working_date.start, working_date.end)
 			end
-			@avg_time[user.id] = (date_count == 0) ? 0 : (time_amount / date_count)
+			other_avg_time[user.id] = (date_count == 0) ? 0 : (time_amount / date_count)
+			all_avg += other_avg_time[user.id]
+
+			# Compare superior&inferior number
+			@compare[:superior_number] += ( @total_avg_time >= other_avg_time[user.id] ) ? 1 : 0
 		end
+		all_avg = (all_avg / users.count)
+		@compare[:inferior_number] = users.count - @compare[:superior_number]
+
+		# Compare average
+		@compare[:average] = @total_avg_time - all_avg
 	end
 
 	def edit

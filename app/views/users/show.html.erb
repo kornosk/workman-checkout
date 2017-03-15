@@ -41,9 +41,11 @@
                 <div class="tile is-parent">
                   <article class="tile is-child notification is-success">
                     <div class="content">
-                      <p class="title">Compare Avg</p>
+                      <p class="title">Compare Avg <%= "%0.2f" % [@compare[:average]] %></p>
                       <div class="content">
                         <!-- Content -->
+                        <p>Better than <%= @compare[:superior_number] %></p>
+                        <p>Worse than <%= @compare[:inferior_number] %></p>
                       </div>
                     </div>
                   </article>
@@ -66,7 +68,7 @@
             </div>
             <div class="nav-right">
               <%= link_to edit_user_path(@user) do %>
-              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <i class="fa fa-pencil fa-1x" aria-hidden="true"></i>
               <% end %>
             </div>
           </nav>
@@ -185,6 +187,7 @@
           <th>Start</th>
           <th>End</th>
           <th>Remark</th>
+          <th></th>
         </tr>
 
         <% @user.absences.each do |absence| %>

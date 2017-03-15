@@ -1,40 +1,55 @@
-<p>
-  <strong>ID:</strong>
-  <%= @position.id %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @position.name %>
-</p>
- 
-<p>
-  <strong>Description:</strong>
-  <%= @position.description %>
-</p>
-
-<%= link_to 'Edit', edit_position_path(@position) %> |
-<%= link_to 'Back', positions_path %>
-
-
-<!-- Workman list -->
-<hr>
-<h2>Workman</h2>
-<table class="table table-striped table-hover" id="position-show-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Picture</th>
-      <th>Detail</th>
-    </tr> 
-  </thead>
-  <tbody>
-    <% @position.users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><img class="profile-pic-small" src=<%= user.picture %>></td>
-        <td><%= link_to 'Detail', user_path(user) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<section class="section" id="position-profile">
+  <div class="container">
+    <div class="">
+      <div class="heading columns">
+        <div class="column">
+          <h3 class="title is-10"><%= @position.name %></h3>
+        </div>
+        <div class="column">
+          <h4 class="subtitle is-4 text-align--right">#<%= @position.id %></h4>
+        </div>
+        <div class="column is-1">
+          <%= link_to edit_position_path(@position) do %>
+          <i class="fa fa-pencil fa-2x float-right" aria-hidden="true"></i>
+          <% end %>
+        </div>
+      </div>
+      <hr class="margin-top-0">
+      <div class="description-wrapper columns">
+        <div class="column">
+          <h4 class="title is-4">Description</h4>
+          <article class="description-body">
+            <%= @position.description %>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="position-workmans">
+  <div class="container">
+    <div class="workman-wrapper">
+      <h4 class="title is-4">Workman</h4>
+      <div class="box">
+        <table class="table table-striped table-hover" id="position-show-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Picture</th>
+              <th>Detail</th>
+            </tr> 
+          </thead>
+          <tbody>
+            <% @position.users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><img class="profile-pic-circle image is-64x64" src=<%= user.picture %>></td>
+              <td><%= link_to 'Detail', user_path(user) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

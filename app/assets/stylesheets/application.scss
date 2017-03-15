@@ -90,6 +90,37 @@ a {
 	}
 }
 
+.text {
+	&-align {
+		&--right {
+			text-align: right;
+		}
+	}
+}
+
+.profile-pic {
+	&-circle {
+		border-radius: 50%;
+	}
+
+	&-small {
+		border-radius: 50%;
+		width: 10vh;
+		height: 10vh;
+	}
+
+	&-medium {
+		border-radius: 50%;
+		width: 20vh;
+		height: 20vh;
+	}
+
+	&-full {
+		border-radius: 50%;
+		width: 70%;
+	}
+}
+
 .control-label {
 	text-align: left;
 }
