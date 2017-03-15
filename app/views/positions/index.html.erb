@@ -1,35 +1,53 @@
-<h1>Hello, Admin!</h1>
-
-<ul class="nav nav-pills">
-  <li role="presentation"><%= link_to 'Work man', controller: 'users' %></li>
-  <li role="presentation"><%= link_to 'Position', controller: 'positions' %></li>
-</ul>
-
-<h1>Listing positions</h1>
-
-<%= link_to 'New position', new_position_path %>
-<table class="table">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Show</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
-
-  <% @positions.each do |position| %>
-    <tr>
-      <td><%= position.id %></td>
-      <td><%= position.name %></td>
-      <td><%= position.description %></td>
-      <td><%= link_to 'Show', position_path(position) %></td>
-      <td><%= link_to 'Edit', edit_position_path(position) %></td>
-      <td><%= link_to 'Destroy', position_path(position),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
-
-<%= link_to 'Back', root_path %>
+<section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="heading column is-11">
+          <h1 class="title">Positions</h1>
+        </div>
+        <div class="column">
+          <%= link_to new_position_path do %>
+            <button class="button is-pulled-right">
+              <i class="fa fa-plus-circle" aria-hidden="true">Add</i>
+            </button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="box">
+        <table class="table table-striped table-hover" cellspacing="0" id="positions-index-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Show</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @positions.each do |position| %>
+              <tr>
+                <td><%= position.id %></td>
+                <td><%= position.name %></td>
+                <td><%= position.description %></td>
+                <td><%= link_to 'Show', position_path(position) %></td>
+                <td><%= link_to 'Edit', edit_position_path(position) %></td>
+                <td><%= link_to 'Destroy', position_path(position),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="container">
+      <%= link_to root_path do %>
+        <button class="button btn-back">
+          Back
+        </button>
+      <% end %>
+    </div>
+  </section>

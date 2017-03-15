@@ -1,17 +1,24 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 .profile-pic {
 	&-small {
-		border-radius: 100px;
+		border-radius: 50%;
 		width: 10vh;
 		height: 10vh;
 	}
 
 	&-medium {
-		border-radius: 100px;
+		border-radius: 50%;
 		width: 20vh;
 		height: 20vh;
+	}
+
+	&-full {
+		border-radius: 50%;
+		width: 70%;
+	}
+}
+
+.btn-file {
+	input {
+		display: none;
 	}
 }

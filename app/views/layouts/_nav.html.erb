@@ -1,11 +1,11 @@
 <nav class="nav has-shadow">
   <div class="nav-left">
-    <a class="nav-item">
+    <a class="nav-item" href="/">
       <img id="logo" src="https://d4ulp9jtgcw4i.cloudfront.net/assets/locabird-010125001f6d78ea998e28b55bb09e64.png">
       <img id="company-name" src="https://d4ulp9jtgcw4i.cloudfront.net/assets/logo-7dfb698b2ffc9629e9e3deb8b7b1010f.png">
     </a>
-    <%= link_to 'Work man', { controller: 'users' }, class: "nav-item is-tab is-hidden-mobile" %>
-    <%= link_to 'Position', { controller: 'positions' }, class: "nav-item is-tab is-hidden-mobile" %>
+    <%= link_to 'Work man', { controller: 'users' }, class: (params[:controller] == 'users' || params[:controller] == 'working_dates') ? "nav-item is-tab is-hidden-mobile is-active" : "nav-item is-tab is-hidden-mobile" %>
+    <%= link_to 'Position', { controller: 'positions' }, class: "nav-item is-tab is-hidden-mobile #{(params[:controller] == 'positions') ? 'is-active' : ''}" %>
   </div>
 
   <div class="nav-right nav-menu">

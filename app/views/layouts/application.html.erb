@@ -6,10 +6,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'users', media: 'all', 'data-turbolinks-track': 'reload' if params[:controller] == "users" %>
+    <%= stylesheet_link_tag    'positions', media: 'all', 'data-turbolinks-track': 'reload' if params[:controller] == "positions" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body id="<%= params[:controller] %>-<%= params[:action] %>">
+    <%= render 'layouts/nav' %>
     <%= yield %>
   </body>
 </html>

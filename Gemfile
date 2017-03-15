@@ -38,6 +38,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-datatables-rails', '~> 3.4.0'
 gem "bulma-rails", "~> 0.3.2"
+gem "font-awesome-rails"
 
 
 

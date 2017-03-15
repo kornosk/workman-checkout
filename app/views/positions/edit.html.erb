@@ -1,40 +1,63 @@
-<h1>New Position</h1>
-
-<%= form_for @position do |f| %>
- 
-  <% if @position.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@position.errors.count, "error") %> prohibited
-        this position from being saved:
-      </h2>
-      <ul>
-        <% @position.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<section class="section">
+  <div class="container box">
+    <div class="heading columns">
+      <div class="column is-8 is-offset-2">
+        <h3 class="title is-3">Edit Position</h3>
+      </div>
     </div>
-  <% end %>
+    <hr class="margin-top-0">
+    <div class="body columns">
+      <div class="column is-8 is-offset-2">
+        <%= form_for @position, html: { class: "control" } do |f| %>
+          <!-- Check Errors -->
+          <% if @position.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= pluralize(@position.errors.count, "error") %> prohibited
+                this position from being saved:
+              </h2>
+              <ul>
+                <% @position.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-  <p>
-    <%= f.label :id, :placeholder => "ID" %><br>
-    <%= f.text_field :id %>
-  </p>
- 
-  <p>
-    <%= f.label :name, :placeholder => "Name" %><br>
-    <%= f.text_field :name %>
-  </p>
- 
-  <p>
-    <%= f.label :description, :placeholder => "Description" %><br>
-    <%= f.text_field :description %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
-<% end %>
 
-<%= link_to 'Back', positions_path %>
+          <!-- Input group -->
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :id, :placeholder => "Position ID" %>
+            </div>
+            <div class="control column">
+              <%= f.text_field :id, { :class => 'input-group form-control' } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :name, :placeholder => "Name" %>
+            </div>
+            <div class="control column">
+              <%= f.text_field :name, { :class => 'input-group form-control' } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1">
+              <%= f.label :description, :placeholder => "Description" %>
+            </div>
+            <div class="control column margin-left-5px margin-right-5px">
+              <%= f.text_area :description, { :class => 'form-control', :rows => "3" } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="column">
+              <%= f.submit 'Submit', class: "button is-primary margin-right-5px float-right" %>
+              <%= link_to "Cancel", positions_path, class: "button btn-back margin-right-5px float-right"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

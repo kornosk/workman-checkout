@@ -1,4 +1,7 @@
+require 'time'
+
 class UsersController < ApplicationController
+
 	def index
 		@users = User.all
 		@avg_time = {}
@@ -36,11 +39,36 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@start = {}
 		@end = {}
-		i = 0
-		@user.working_dates.each do |working_date|
+
+		# Calculate just last 5 days
+		@amount_time = 0;
+		@user.working_dates.last(5).each do |working_date|
 		   	@start[working_date.start.to_date] = working_date.start.strftime("%H:%M")
 		   	@end[working_date.end.to_date] = working_date.end.strftime("%H:%M")
-		   	i += 1
+		   	@amount_time += diff_time(working_date.start, working_date.end);
+		end
+
+		# Calculate total
+		time_amount = 0
+		date_count = @user.working_dates.count
+		@total_late_time = 0;
+		@total_avg_time = 0;
+		@user.working_dates.each do |working_date|
+			@total_late_time += 1 if is_late(working_date.start)
+			time_amount += diff_time(working_date.start, working_date.end)
+		end
+		@total_avg_time = (date_count == 0) ? 0 : (time_amount / date_count)
+
+		# Compute all average time
+		@users = User.all
+		@avg_time = {}
+		@users.each do |user|
+			time_amount = 0
+			date_count = user.working_dates.count
+			user.working_dates.each do |working_date|
+				time_amount += diff_time(working_date.start, working_date.end)
+			end
+			@avg_time[user.id] = (date_count == 0) ? 0 : (time_amount / date_count)
 		end
 	end
 
@@ -75,5 +103,10 @@ class UsersController < ApplicationController
 
 		def diff_time(start_time, end_time) # Get datetime
 			return ((start_time - end_time).abs) / 3600
+		end
+
+		def is_late(start_time) # Check is late ?
+			start_working_time = Time.parse "10:00 am";
+			return (start_time < start_working_time)
 		end
 end

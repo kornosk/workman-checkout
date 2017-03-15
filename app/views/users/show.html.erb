@@ -1,99 +1,212 @@
-<p>
-  	<strong>ID:</strong>
-  	<%= @user.id %>
-</p>
+<!-- Profile -->
+<%=  %>
+<section class="section" id="user-profile">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-9">
+        <div class="stat-wrapper box">
+          <div class="columns">
+            <div class="column">
+              <h3 class="title is-3">Statistic</h3>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="tile is-ancestor">
+                <div class="tile is-vertical is-8">
+                  <div class="tile">
+                    <div class="tile is-parent is-vertical">
+                      <article class="tile is-child notification is-primary">
+                        <p class="title">Amount time <%= @amount_time %></p>
+                      </article>
+                      <article class="tile is-child notification is-warning">
+                        <p class="title">Late time <%= @total_late_time %></p>
+                      </article>
+                    </div>
+                    <div class="tile is-parent">
+                      <article class="tile is-child notification is-info">
+                        <p class="title">Average Time <%= "%0.2f" % [@total_avg_time] %></p>
+                      </article>
+                    </div>
+                  </div>
+                  <div class="tile is-parent">
+                    <article class="tile is-child notification is-danger">
+                      <p class="title">Absence <%= @user.absences.count %></p>
+                      <div class="content">
+                        <!-- Content -->
+                      </div>
+                    </article>
+                  </div>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-success">
+                    <div class="content">
+                      <p class="title">Compare Avg</p>
+                      <div class="content">
+                        <!-- Content -->
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="profile-wrapper box">
+          <nav class="nav">
+            <div class="nav-left">
 
-<p>
-  	<strong>Name:</strong>
-  	<%= @user.name %>
-</p>
- 
-<p>
-	<strong>Picture:</strong>
-	<img class="profile-pic-medium" src=<%= @user.picture %>>
-</p>
-
-<p>
-	<strong>Position</strong>
-	<%= @user.position.name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
+            </div>
+            <div class="nav-center">
+              <span class="nav-item">
+                <h2 class="title is-2"><%= @user.name %></h2>
+              </span>
+            </div>
+            <div class="nav-right">
+              <%= link_to edit_user_path(@user) do %>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <% end %>
+            </div>
+          </nav>
+          <div class="columns" id="user-profile-pic">
+            <div class="column flex-item-center">
+              <img class="profile-pic-full" src=<%= @user.picture %>>
+            </div>
+          </div>
+          <div class="columns" id="user-profile-detail">
+            <div class="column">
+              <table class="table">
+                <thead></thead>
+                <tfoot></tfoot>
+                <tbody>
+                  <tr>
+                    <th>ID</th>
+                    <td><%= @user.id %></td>
+                  </tr>
+                  <tr>
+                    <th>Position</th>
+                    <td><%= link_to @user.position.name, position_path(@user.position) %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <hr>
 
-<!-- Working date -->
-<h2>Working Dates</h2>
-<%= link_to 'Add', new_user_working_date_path(@user.id) %>
+<!-- Working Data -->
+<section class="section" id="user-working-dates">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-5">
+        <div class="box">
+          <div class="columns">
+            <div class="column is-9">
+              <h3 class="title is-3">Working Data</h3>
+            </div>
+            <div class="column">
+              <%= link_to new_user_working_date_path(@user.id) do %>
+                <button class="button is-pulled-right">
+                  <i class="fa fa-plus-circle" aria-hidden="true">Add</i>
+                </button>
+              <% end %>
+            </div>
+          </div>
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+              <th></th>
+              <th></th>
+            </tr>
 
-<table class="table">
-	<tr>
-	    <th>ID</th>
-      <th>Date</th>
-	    <th>Start</th>
-	    <th>End</th>
-      <th></th>
-      <th></th>
-  	</tr>
+            <% @user.working_dates.last(5).each do |working_date| %>
+            <tr>
+              <td><%= working_date.id %></td>
+              <td><%= working_date.start.to_date %></td>
+              <td><%= working_date.start.to_s(:time) %></td>
+              <td><%= working_date.end.to_s(:time) %></td>
+              <td><%= link_to 'Edit', edit_user_working_date_path(@user, working_date) %></td>
+              <td><%= link_to 'Remove', user_working_date_path(@user, working_date),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+              <% end %>
+            </table>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box">
 
-  	<% @user.working_dates.limit(7).each do |working_date| %>
-    <tr>
-  		<td><%= working_date.id %></td>
-	    <td><%= working_date.start.to_date %></td>
-      <td><%= working_date.start.to_s(:time) %></td>
-	    <td><%= working_date.end.to_s(:time) %></td>
-      <td><%= link_to 'Edit', edit_user_working_date_path(@user, working_date) %></td>
-	    <td><%= link_to 'Remove', user_working_date_path(@user, working_date),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  	<% end %>
-</table>
-
-<!-- Chart for a week -->
-<%= line_chart [
-  {name: "Start", data: @start},
-  {name: "End", data: @end}
-],
-min: 0.0, max: 24.00,
-xtitle: "Date", ytitle: "Time",
-curve: true,
-legend: "top"
-%>
-
+          <!-- Chart for a week -->
+          <%= line_chart [
+              {name: "Start", data: @start},
+              {name: "End", data: @end}
+            ],
+            min: 0.0, max: 24.00,
+            xtitle: "Date", ytitle: "Time",
+            curve: true,
+            legend: "top"
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <hr>
 
-<!-- Absent date -->
-<h2>Absent Dates</h2>
-<%= link_to 'Add', new_user_absence_path(@user.id) %>
+<!-- Absence Data -->
+<section class="section" id="user-absences">
+  <div class="container">
+    <div class="box">
+      <div class="columns">
+        <div class="column is-9">
+          <h3 class="title is-3">Absence Data</h3>
+        </div>
+        <div class="column">
+          <%= link_to new_user_absence_path(@user.id) do %>
+          <button class="button is-pulled-right">
+            <i class="fa fa-plus-circle" aria-hidden="true">Add</i>
+          </button>
+          <% end %>
+        </div>
+      </div>
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Remark</th>
+        </tr>
 
-<table class="table">
-	<tr>
-	    <th>ID</th>
-	    <th>Start</th>
-	    <th>End</th>
-	    <th>Remark</th>
-  	</tr>
-
-  	<% @user.absences.each do |absence| %>
-    <tr>
-  		<td><%= absence.id %></td>
-	    <td><%= absence.start %></td>
-	    <td><%= absence.end %></td>
-	    <td><%= absence.remark %></td>
-	    <td><%= link_to 'Remove', user_absence_path(@user, absence),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  	<% end %>
-</table>
-
-
-
-
-
-
+        <% @user.absences.each do |absence| %>
+        <tr>
+          <td><%= absence.id %></td>
+          <td><%= absence.start %></td>
+          <td><%= absence.end %></td>
+          <td><%= absence.remark %></td>
+          <td><%= link_to 'Remove', user_absence_path(@user, absence),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+  </div>
+  <div class="container">
+    <%= link_to users_path do %>
+      <button class="button btn-back">Back</button>
+    <% end %>
+  </div>
+</section>
 
 
 

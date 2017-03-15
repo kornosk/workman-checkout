@@ -1,40 +1,72 @@
-<h1>New User</h1>
-
-<%= form_for @user do |f| %>
- 
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@user.errors.count, "error") %> prohibited
-        this user from being saved:
-      </h2>
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<section class="section">
+  <div class="container box">
+    <div class="heading columns">
+      <div class="column is-8 is-offset-2">
+        <h3 class="title is-3">New User</h3>
+      </div>
     </div>
-  <% end %>
- 
-  <p>
-    <%= f.label :name, :placeholder => "Name" %><br>
-    <%= f.text_field :name %>
-  </p>
- 
-  <p>
-    <%= f.label :picture, :placeholder => "Picture" %><br>
-    <%= f.file_field :picture %>
-  </p>
+    <hr class="margin-top-0">
+    <div class="body columns">
+      <div class="column is-8 is-offset-2">
+        <%= form_for @user, html: { class: "control" } do |f| %>
+          <!-- Check Errors -->
+          <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= pluralize(@user.errors.count, "error") %> prohibited
+                this user from being saved:
+              </h2>
+              <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-  <p>
-    <%= f.label :position_id, :placeholder => "Position ID" %><br>
-    <%= f.collection_select :position_id, Position.order(:name),:id,:name %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
-<% end %>
 
-<%= link_to 'Back', users_path %>
+          <!-- Input group -->
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :name, :placeholder => "Name" %>
+            </div>
+            <div class="control column">
+              <%= f.text_field :name, { :class => 'input-group form-control' } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :position_id, :placeholder => "Position ID" %>
+            </div>
+            <div class="control column margin-left-5px margin-right-5px">
+              <%= f.collection_select :position_id, Position.order(:name),:id,:name,{}, { :class => ' form-control'} %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :picture, :placeholder => "Picture" %>
+            </div>
+            <div class="control column">
+              <label class="btn btn-default btn-file margin-left-5px margin-right-5px">
+                Choose file
+                <%= f.file_field :picture, { :class => 'input-group form-control' } %>
+              </label>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="column">
+              <%= f.submit 'Submit', class: "button is-primary margin-right-5px float-right" %>
+              <%= link_to "Cancel", users_path, class: "button btn-back margin-right-5px float-right"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+

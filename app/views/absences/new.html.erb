@@ -1,39 +1,67 @@
-<h1>New Absent Date</h1>
-<%= form_for ([@user, @absence]) do |f| %>
- 
-  <% if @absence.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@absence.errors.count, "error") %> prohibited
-        this absence from being saved:
-      </h2>
-      <ul>
-        <% @absence.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<section class="section">
+  <div class="container box">
+    <div class="heading columns">
+      <div class="column is-8 is-offset-2">
+        <h3 class="title is-3">New Absent Date</h3>
+      </div>
     </div>
-  <% end %>
- 
-  <p>
-    <%= f.label :start, :placeholder => "Start" %><br>
-    <%= f.text_field :start %>
-  </p>
- 
-  <p>
-    <%= f.label :end, :placeholder => "End" %><br>
-    <%= f.text_field :end %>
-  </p>
+    <hr class="margin-top-0">
+    <div class="body columns">
+      <div class="column is-8 is-offset-2">
+        <%= form_for ([@user, @absence]), html: { class: "control" } do |f| %>
+          <!-- Check Errors -->
+          <% if @absence.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= pluralize(@absence.errors.count, "error") %> prohibited
+                this absence from being saved:
+              </h2>
+              <ul>
+                <% @absence.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-  <p>
-    <%= f.label :remark, :placeholder => "Remark" %><br>
-    <%= f.text_field :remark %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
-<% end %>
 
-<%= link_to 'Back', user_path(@user) %>
+          <!-- Datetime Picker -->
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :start, :placeholder => "Start" %>
+            </div>
+            <div class="control column">
+              <%= f.date_select :start, {}, { :class => 'input-group form-control' } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1 flex-item-center--vertical">
+              <%= f.label :end, :placeholder => "End" %>
+            </div>
+            <div class="control column">
+              <%= f.date_select :end, {}, { :class => 'input-group form-control' } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="control-label column is-1">
+              <%= f.label :remark, :placeholder => "Remark" %>
+            </div>
+            <div class="control column margin-left-5px margin-right-5px">
+              <%= f.text_area :remark, { :class => ' form-control', :rows => "3" } %>
+            </div>
+          </div>
+          <div class="columns control is-horizontal">
+            <div class="column">
+              <%= f.submit 'Submit', class: "button is-primary margin-right-5px float-right" %>
+              <%= link_to "Cancel", user_path(@user), class: "button btn-back margin-right-5px float-right"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
